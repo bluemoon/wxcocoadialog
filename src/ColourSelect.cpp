@@ -40,12 +40,13 @@ void CocoaDialogApp::ShowColourDialog() const {
 	}
 	else if (m_optionDict.HasOption(wxT("output-css"))) {
 		const wxString outputColour = selectedColour.GetAsString(wxC2S_CSS_SYNTAX);
-		printf("%s", outputColour.mb_str(wxConvUTF8));
+		printf("%s", outputColour.utf8_str().data());
 	}
 	else {
 		const wxString outputColour = selectedColour.GetAsString(wxC2S_HTML_SYNTAX);
-		printf("%s", outputColour.mb_str(wxConvUTF8));
+		printf("%s", outputColour.utf8_str().data());
 	}
 
 	if (!m_optionDict.HasOption(wxT("no-newline"))) printf("\n");
 }
+

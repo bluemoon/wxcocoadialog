@@ -58,7 +58,7 @@ void CocoaDialogApp::ShowPopupMenu() const {
 	// TODO: Implement for other platforms than windows
 
 	if (res != 0) {
-		if (m_optionDict.HasOption(wxT("string-output"))) printf("%s", menu.GetLabel(res).mb_str(wxConvUTF8));
+		if (m_optionDict.HasOption(wxT("string-output"))) printf("%s", menu.GetLabel(res).utf8_str().data());
 		else printf("%d", res);
 
 		if (!m_optionDict.HasOption(wxT("no-newline"))) printf("\n");
@@ -75,3 +75,4 @@ void CocoaDialogApp::ShowPopupMenu() const {
 #endif //__WXMSW__
 	}
 }
+

@@ -146,7 +146,7 @@ void MessageDialog::OnClose(wxCloseEvent& WXUNUSED(event)) {
 }
 
 void MessageDialog::OnButton1(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s", m_button1->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s", m_button1->GetLabel().utf8_str().data());
 	else printf("1");
 
 	if (!m_options.HasOption(wxT("no-newline"))) printf("\n");
@@ -155,7 +155,7 @@ void MessageDialog::OnButton1(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void MessageDialog::OnButton2(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s", m_button3->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s", m_button3->GetLabel().utf8_str().data());
 	else printf("2");
 
 	if (!m_options.HasOption(wxT("no-newline"))) printf("\n");
@@ -164,7 +164,7 @@ void MessageDialog::OnButton2(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void MessageDialog::OnButton3(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s", m_button3->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s", m_button3->GetLabel().utf8_str().data());
 	else printf("3");
 
 	if (!m_options.HasOption(wxT("no-newline"))) printf("\n");

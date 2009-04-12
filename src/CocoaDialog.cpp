@@ -3,7 +3,11 @@
 #include "ProgressBar.h"
 #include "Dropdown.h"
 #include "MessageDialog.h"
+#ifdef FEAT_BROWSER
 #include "HtmlDialog.h"
+#endif
+
+#include <stdio.h>
 
 IMPLEMENT_APP_NO_MAIN(CocoaDialogApp)
 
@@ -130,9 +134,11 @@ bool CocoaDialogApp::OnInit()
 		ShowPopupMenu();
 		return false; // end program
 	}
+#ifdef FEAT_BROWSER
 	else if (runmode == wxT("html")) {
 		new HtmlDialog(m_parentWnd, m_optionDict);
 	}
+#endif
 	else return OptionError(wxT("Unknown runmode."));
 
 	wxLogDebug(wxT("wxCD done"));
@@ -161,7 +167,7 @@ int CocoaDialogApp::OnExit() {
 bool CocoaDialogApp::OptionError(const wxString& error) const {
 	printf("Invalid options:\n\n");
 	
-	if (!error.empty()) printf(error.mb_str(wxConvUTF8));
+	if (!error.empty()) printf("%s", error.utf8_str().data());
 	
 	printf("\n");
 	OptionHelp();
@@ -233,15 +239,17 @@ bool CocoaDialogApp::OptionHelp(const wxString& runmode) const {
 	printf("\tGlobal Options:\n");
 	printf("\t\t--help, --debug, --title, --width, --height\n");
 	printf("\t\t--string-output, --no-newline\n\n");
-//	printf("See ... for detailed documentation\n");
+//	printf("See ... for detailed documentation\n"));
 
 	return false;
 }
 
 
 int main(int argc, char* argv[]) {
+#ifdef _WIN32
 	// To be compatible with cygwin, we want to avoid lf->crlf conversion
 	_setmode( _fileno( stdout ), _O_BINARY );
+#endif
 
 	// We want to keep the ansi versions for the arguments so
 	// that we can convert them from utf8.
@@ -251,7 +259,8 @@ int main(int argc, char* argv[]) {
 
 	// Start by initializing wxWidgets.
 	// this is needed as we do not have a main wxApp class.
-	wxEntry(::GetModuleHandle(NULL));
+	wxEntry(argc, argv);
 	
 	return 0;
 }
+

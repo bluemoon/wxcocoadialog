@@ -84,7 +84,7 @@ void DropdownBox::PrintValue() const {
 	const int ndx = m_dropdownBox->GetSelection();
 
 	if (m_options.HasOption(wxT("string-output"))) {
-		printf("%s", m_items[ndx].mb_str(wxConvUTF8));
+		printf("%s", m_items[ndx].utf8_str().data());
 	}
 	else printf("%d", ndx);
 
@@ -118,7 +118,7 @@ void DropdownBox::OnSelection(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void DropdownBox::OnButton1(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button1->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button1->GetLabel().utf8_str().data());
 	else printf("1\n");
 
 	PrintValue();
@@ -127,7 +127,7 @@ void DropdownBox::OnButton1(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void DropdownBox::OnButton2(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button2->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button2->GetLabel().utf8_str().data());
 	else printf("2\n");
 
 	PrintValue();
@@ -136,7 +136,7 @@ void DropdownBox::OnButton2(wxCommandEvent& WXUNUSED(event)) {
 }
 
 void DropdownBox::OnButton3(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button3->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button3->GetLabel().utf8_str().data());
 	else printf("3\n");
 
 	PrintValue();

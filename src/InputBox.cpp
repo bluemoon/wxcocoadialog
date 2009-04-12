@@ -118,30 +118,30 @@ void InputBox::OnClose(wxCloseEvent& WXUNUSED(event)) {
 }
 
 void InputBox::OnButton1(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button1->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button1->GetLabel().utf8_str().data());
 	else printf("1\n");
 
-	printf(m_inputBox->GetValue().mb_str(wxConvUTF8));
+	printf("%s", m_inputBox->GetValue().utf8_str().data());
 	if (!m_options.HasOption(wxT("no-newline"))) printf("\n");
 	
 	Close(); // Dlg is top window, so this ends the app.
 }
 
 void InputBox::OnButton2(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button3->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button3->GetLabel().utf8_str().data());
 	else printf("2\n");
 
-	printf(m_inputBox->GetValue().mb_str(wxConvUTF8));
+	printf("%s", m_inputBox->GetValue().utf8_str().data());
 	if (!m_options.HasOption(wxT("no-newline"))) printf("\n");
 	
 	Close(); // Dlg is top window, so this ends the app.
 }
 
 void InputBox::OnButton3(wxCommandEvent& WXUNUSED(event)) {
-	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button3->GetLabel().mb_str(wxConvUTF8));
+	if (m_options.HasOption(wxT("string-output"))) printf("%s\n", m_button3->GetLabel().utf8_str().data());
 	else printf("3\n");
 
-	printf(m_inputBox->GetValue().mb_str(wxConvUTF8));
+	printf("%s\n", m_inputBox->GetValue().utf8_str().data());
 
 	if (!m_options.HasOption(wxT("no-newline"))) printf("\n");
 	Close(); // Dlg is top window, so this ends the app.
