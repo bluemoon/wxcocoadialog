@@ -15,9 +15,9 @@ bool OptionDict::ParseArgs(const wxArrayString& args) {
 		unsigned int i2 = i+1;
 		while (i2 < args.GetCount()) {
 			const wxString tmp(args[i2]);
-			
-			if (!tmp.StartsWith(wxT("--"))) values.Add(tmp);
-			else break;	// We have reached the next option
+
+			if (tmp.StartsWith(wxT("--"))) break; // We have reached the next option
+			values.Add(tmp);
 			
 			++i2;
 		}
@@ -38,13 +38,11 @@ void OptionDict::SetOption(const wxString& key, const wxString& value) {
 
 bool OptionDict::HasOption(const wxString& key) const {
 	Dict::const_iterator valP = m_optionDict.find(key);
-
 	return valP != m_optionDict.end();
 }
 
 bool OptionDict::HasMultiOption(const wxString& key) const {
 	MultiDict::const_iterator valP = m_multiDict.find(key);
-	
 	return (valP != m_multiDict.end() || HasOption(key));
 }
 
@@ -76,14 +74,13 @@ bool OptionDict::GetMultiOption(const wxString& key, wxArrayString& values) cons
 		values = valP->second;
 		return true;
 	}
-	else {
-		// Check if there is a matching option with a single value
-		Dict::const_iterator singleValP = m_optionDict.find(key);
 
-		if (singleValP != m_optionDict.end()){
-			values.Add(singleValP->second);
-			return true;
-		}
+	// Check if there is a matching option with a single value
+	Dict::const_iterator singleValP = m_optionDict.find(key);
+
+	if (singleValP != m_optionDict.end()){
+		values.Add(singleValP->second);
+		return true;
 	}
 
 	return false;
@@ -103,4 +100,3 @@ void OptionDict::Print() const {
 		}
 	}
 }
-
