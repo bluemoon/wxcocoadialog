@@ -48,9 +48,7 @@ bool OptionDict::HasMultiOption(const wxString& key) const {
 
 const wxString& OptionDict::GetOption(const wxString& key) const {
 	Dict::const_iterator valP = m_optionDict.find(key);
-
-	if (valP != m_optionDict.end()) return valP->second;
-	else return s_emptyString;
+	return (valP != m_optionDict.end()) ? valP->second : s_emptyString;
 }
 
 bool OptionDict::GetIntegerOption(const wxString& key, int& value) const {
