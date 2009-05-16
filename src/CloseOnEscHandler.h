@@ -2,7 +2,7 @@
 #define __CLOSEONESCHANDLER_H__
 
 #include "wx/wxprec.h" // For compilers that support precompilation, includes "wx/wx.h".
-
+#include "wx/wx.h"
 class CloseOnEscHandler :
 	public wxEvtHandler
 {
